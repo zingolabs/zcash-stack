@@ -57,8 +57,8 @@ zcashd:
   podManagementPolicy: Parallel
   initSnapshot:
     enabled: false
-    url: https://link.storjshare.io/s/jx5wylg5q6hyg2myyah5eldbjs7q/nodedumps/zec/zcashd-2024-03-31.tar?download=1
-    explorer_url: https://link.storjshare.io/s/jvyxajyevhmuyzsjlobsmv5enguq/nodedumps/zec/zcashd-explorer-2024-11-20.tar?download=1
+    url: ""
+    explorer_url: ""
   reindex: false
   lightwalletd: true
   explorer: false

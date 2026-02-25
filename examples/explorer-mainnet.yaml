@@ -6,7 +6,7 @@ zcashd:
   explorer: true
   lightwalletd: false
   initSnapshot:
-    enabled: true
+    enabled: false
 
 explorer:
   enabled: true
