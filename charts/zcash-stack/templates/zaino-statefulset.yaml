@@ -32,8 +32,9 @@ spec:
       - name: zaino
         image: {{ .Values.zaino.image.repository }}:{{ .Values.zaino.image.tag }}{{- if .Values.zaino.image.hash }}@sha256:{{ .Values.zaino.image.hash }}{{- end }}
         imagePullPolicy: {{ .Values.zaino.image.pullPolicy }}
-        command: ["/app/zainod"]
+        command: ["zainod"]
         args:
+          - start
           - --config
           - /etc/zaino/zaino.toml
           {{- with .Values.zaino.additionalArgs }}
