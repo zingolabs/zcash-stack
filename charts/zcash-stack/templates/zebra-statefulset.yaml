@@ -46,7 +46,7 @@ spec:
       {{- end }}
       containers:
       - name: zebra
-        image: {{ .Values.zebra.image.repository }}:{{ .Values.zebra.image.tag }}@sha256:{{ .Values.zebra.image.hash }}
+        image: {{ .Values.zebra.image.repository }}:{{ .Values.zebra.image.tag }}{{- if .Values.zebra.image.hash }}@sha256:{{ .Values.zebra.image.hash }}{{- end }}
         imagePullPolicy: {{ .Values.zebra.image.pullPolicy }}
         command: ["zebrad", "-c", "/etc/zebrad/zebrad.toml"]
         args: []
