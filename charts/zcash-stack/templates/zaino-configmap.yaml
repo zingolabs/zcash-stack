@@ -5,21 +5,28 @@ metadata:
   name: {{ .Values.zaino.name }}-config
 data:
   zaino.toml: |
-    network = "{{ if .Values.zebra.testnet }}Testnet{{ else }}Mainnet{{ end }}"
-    grpc_listen_address = "0.0.0.0:8137"
-    grpc_tls = false
-    tls_cert_path = "None"
-    tls_key_path = "None"
-    validator_listen_address = "{{ .Values.zaino.rpcService }}:{{ if .Values.zebra.testnet }}18232{{ else }}8232{{ end }}"
-    validator_cookie_auth = false
-    validator_cookie_path = "None"
-    validator_user = "None"
-    validator_password = "None"
-    map_capacity = "None"
-    map_shard_amount = "None"
-    db_path = "/home/zaino/.cache/zaino"
-    db_size = {{ .Values.zaino.config.dbSize }}
-    no_sync = {{ .Values.zaino.config.noSync }}
-    no_db = {{ .Values.zaino.config.noDB }}
-    no_state = {{ .Values.zaino.config.noState }}
+    backend = 'fetch'
+    zebra_db_path = '/home/zaino/.cache/zebra'
+    network = '{{ if .Values.zebra.testnet }}Testnet{{ else }}Mainnet{{ end }}'
+
+    [grpc_settings]
+    listen_address = '0.0.0.0:8137'
+
+    [validator_settings]
+    validator_grpc_listen_address = '{{ .Values.zaino.rpcService }}:{{ if .Values.zebra.testnet }}18230{{ else }}8230{{ end }}'
+    validator_jsonrpc_listen_address = '{{ .Values.zaino.rpcService }}:{{ if .Values.zebra.testnet }}18232{{ else }}8232{{ end }}'
+    validator_user = '{{ .Values.rpc.credentials.rpcUser }}'
+    validator_password = '{{ .Values.rpc.credentials.rpcPassword }}'
+
+    [service]
+    timeout = 30
+    channel_size = 32
+
+    [storage.cache]
+    capacity = 10000
+    shard_power = 4
+
+    [storage.database]
+    path = '/home/zaino/.cache/zaino'
+    size = {{ .Values.zaino.config.dbSize }}
 {{- end }}
