@@ -12,4 +12,8 @@ spec:
       targetPort: {{ if .Values.zebra.testnet }}18232{{ else }}8232{{ end }}
       protocol: TCP
       name: rpc
+    - port: 8080
+      targetPort: 8080
+      protocol: TCP
+      name: metrics
 {{- end }}
