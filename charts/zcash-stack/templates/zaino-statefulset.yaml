@@ -75,4 +75,11 @@ spec:
       resources:
         requests:
           storage: {{ .Values.zaino.volumes.data.size }}
+      {{- if .Values.zaino.storageClassName }}
+      storageClassName: {{ .Values.zaino.storageClassName }}
+      {{- end }}
+      {{- with .Values.zaino.volumes.data.dataSource }}
+      dataSource:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
 {{- end }} 

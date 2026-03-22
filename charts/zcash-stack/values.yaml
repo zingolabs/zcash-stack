@@ -20,6 +20,11 @@ zebra:
   volumes:
     data:
       size: 400Gi
+      # Optional: restore from VolumeSnapshot
+      # dataSource:
+      #   kind: VolumeSnapshot
+      #   name: zebra-snapshot-xyz
+      #   apiGroup: snapshot.storage.k8s.io
   service:
     type: ClusterIP
   requests: {}
@@ -157,6 +162,11 @@ zaino:
   volumes:
     data:
       size: 40Gi
+      # Optional: restore from VolumeSnapshot
+      # dataSource:
+      #   kind: VolumeSnapshot
+      #   name: zaino-snapshot-xyz
+      #   apiGroup: snapshot.storage.k8s.io
   service:
     type: ClusterIP
     port: 8137
