@@ -41,6 +41,19 @@ spec:
           {{- with .Values.zaino.additionalArgs }}
             {{- toYaml . | nindent 10 }}
           {{- end}}
+        env:
+          {{- if .Values.zaino.logging.format }}
+          - name: ZAINOLOG_FORMAT
+            value: {{ .Values.zaino.logging.format | quote }}
+          {{- end }}
+          {{- if .Values.zaino.logging.color }}
+          - name: ZAINOLOG_COLOR
+            value: {{ .Values.zaino.logging.color | quote }}
+          {{- end }}
+          {{- if .Values.zaino.logging.level }}
+          - name: RUST_LOG
+            value: {{ .Values.zaino.logging.level | quote }}
+          {{- end }}
         ports:
         - containerPort: 8137
           name: grpc

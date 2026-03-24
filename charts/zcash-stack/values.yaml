@@ -153,6 +153,14 @@ zaino:
   validator:
     namespace: ""  # empty = same namespace as zaino
     name: zebra
+  # Logging configuration (requires improved-logging branch)
+  logging:
+    # Format: stream (default), tree (hierarchical), json (for Loki/ELK)
+    format: ""
+    # Color output: true, false, auto
+    color: ""
+    # Log level filter (standard RUST_LOG format)
+    level: ""
   ingress:
     enabled: true
     domains: []
