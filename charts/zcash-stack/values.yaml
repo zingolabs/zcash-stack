@@ -149,6 +149,10 @@ explorer:
 zaino:
   enabled: false
   name: zaino
+  # Validator reference for observability labels (defaults to same namespace)
+  validator:
+    namespace: ""  # empty = same namespace as zaino
+    name: zebra
   ingress:
     enabled: true
     domains: []

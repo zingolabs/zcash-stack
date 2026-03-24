@@ -3,6 +3,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.zaino.name }}
+  labels:
+    app: {{ .Values.zaino.name }}
+    app.kubernetes.io/name: zaino
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: indexer
+    zingolabs.io/validator: {{ .Values.zaino.validator.namespace | default .Release.Namespace }}/{{ .Values.zaino.validator.name }}
 spec:
   type: {{ .Values.zaino.service.type }}
   selector:

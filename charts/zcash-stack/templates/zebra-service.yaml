@@ -3,6 +3,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: {{ .Values.zebra.name }}
+  labels:
+    app: {{ .Values.zebra.name }}
+    app.kubernetes.io/name: zebra
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/component: validator
 spec:
   type: {{ .Values.zebra.service.type }}
   selector:
