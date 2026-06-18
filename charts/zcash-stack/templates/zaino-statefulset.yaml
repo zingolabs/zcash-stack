@@ -22,7 +22,7 @@ spec:
         args:
           - |
             mkdir -p /home/zaino/.cache/zaino
-            chown -R 2003:2003 /home/zaino
+            chown -R {{ .Values.zaino.runAsUser }}:{{ .Values.zaino.runAsGroup }} /home/zaino
         volumeMounts:
         - name: data
           mountPath: /home/zaino/.cache/zaino

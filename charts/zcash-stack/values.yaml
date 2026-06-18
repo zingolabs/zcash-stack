@@ -194,6 +194,8 @@ zaino:
   limits:
     memory: 6Gi
   additionalArgs: []
+  runAsUser: 1000
+  runAsGroup: 1000
   config:
     dbSize: 64
     noSync: false
