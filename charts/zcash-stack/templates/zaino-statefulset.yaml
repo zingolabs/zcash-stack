@@ -54,9 +54,9 @@ spec:
           - name: RUST_LOG
             value: {{ .Values.zaino.logging.level | quote }}
           {{- end }}
-          {{- range .Values.zaino.extraEnv }}
-          - name: {{ .name }}
-            value: {{ .value | quote }}
+          {{- range $name, $value := .Values.zaino.extraEnv }}
+          - name: {{ $name }}
+            value: {{ $value | quote }}
           {{- end }}
         ports:
         - containerPort: 8137

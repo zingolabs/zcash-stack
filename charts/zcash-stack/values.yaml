@@ -161,11 +161,10 @@ zaino:
     color: ""
     # Log level filter (standard RUST_LOG format)
     level: ""
-  # Additional environment variables passed to the zaino container
-  extraEnv: []
+  # Additional environment variables passed to the zaino container (map, so helm --set merges cleanly)
+  extraEnv: {}
   # Example:
-  #   - name: OTEL_EXPORTER_OTLP_ENDPOINT
-  #     value: http://tempo.monitoring.svc.cluster.local:4317
+  #   OTEL_EXPORTER_OTLP_ENDPOINT: http://tempo.monitoring.svc.cluster.local:4317
   ingress:
     enabled: true
     domains: []
