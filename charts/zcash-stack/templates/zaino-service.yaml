@@ -21,4 +21,11 @@ spec:
     - protocol: TCP
       port: {{ .Values.zaino.service.port }}
       targetPort: 8137
+      name: grpc
+    {{- if .Values.zaino.service.metricsPort }}
+    - protocol: TCP
+      port: {{ .Values.zaino.service.metricsPort }}
+      targetPort: {{ .Values.zaino.service.metricsPort }}
+      name: metrics
+    {{- end }}
 {{- end }} 
