@@ -175,6 +175,9 @@ zaino:
     pullPolicy: IfNotPresent
   replicas: 1
   rpcService: zebra
+  # Override the JSON-RPC port the init-rpc readiness check waits on.
+  # Empty = derive from network. Set for external validators (e.g. 18232 testnet).
+  rpcPort: ""
   volumes:
     data:
       size: 40Gi
