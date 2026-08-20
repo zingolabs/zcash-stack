@@ -100,6 +100,13 @@ spec:
       - name: zebra-config
         configMap:
           name: {{ .Values.zebra.name }}-config
+      {{- if .Values.zebra.volumes.data.hostPath }}
+      - name: {{ .Values.zebra.name }}-data
+        hostPath:
+          path: {{ .Values.zebra.volumes.data.hostPath }}
+          type: DirectoryOrCreate
+      {{- end }}
+  {{- if not .Values.zebra.volumes.data.hostPath }}
   volumeClaimTemplates:
   - metadata:
       name: {{ .Values.zebra.name }}-data
@@ -115,4 +122,5 @@ spec:
       dataSource:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+  {{- end }}
 {{- end }}

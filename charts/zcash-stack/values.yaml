@@ -20,6 +20,9 @@ zebra:
   volumes:
     data:
       size: 400Gi
+      # Optional: back the state cache with a hostPath dir instead of a PVC
+      # (single-node shared cache). When set, the volumeClaimTemplate is omitted.
+      # hostPath: /srv/zebra-state-cache-testnet
       # Optional: restore from VolumeSnapshot
       # dataSource:
       #   kind: VolumeSnapshot
