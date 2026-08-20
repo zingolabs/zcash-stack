@@ -197,6 +197,10 @@ zaino:
   runAsGroup: 1000
   config:
     dbSize: 64
+    # Zaino backend selector: 'fetch' (JSON-RPC) or 'state'/'direct' (read Zebra's state db)
+    backend: fetch
+    # Path to Zebra's cache_dir (state-db root); used by the state/direct backends
+    zebraDbPath: /home/zaino/.cache/zebra
     noSync: false
     noDB: false
     noState: false

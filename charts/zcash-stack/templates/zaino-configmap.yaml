@@ -5,8 +5,8 @@ metadata:
   name: {{ .Values.zaino.name }}-config
 data:
   zaino.toml: |
-    backend = 'fetch'
-    zebra_db_path = '/home/zaino/.cache/zebra'
+    backend = '{{ .Values.zaino.config.backend }}'
+    zebra_db_path = '{{ .Values.zaino.config.zebraDbPath }}'
     network = '{{ if .Values.zebra.testnet }}Testnet{{ else }}Mainnet{{ end }}'
 
     [grpc_settings]
