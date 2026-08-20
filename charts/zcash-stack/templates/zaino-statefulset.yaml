@@ -15,6 +15,18 @@ spec:
         app: {{ .Values.zaino.name }}
     spec:
       enableServiceLinks: false  # Prevent k8s service env vars conflicting with ZAINO_ config prefix
+      {{- with .Values.zaino.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.zaino.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.zaino.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       initContainers:
       - name: init-perms
         image: busybox:{{ .Values.global.images.busybox.tag }}@sha256:{{ .Values.global.images.busybox.hash }}

@@ -16,6 +16,18 @@ spec:
     spec:
       # These automatic ENV do not play nicely with Zebra's entrypoint
       enableServiceLinks: false
+      {{- with .Values.zebra.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.zebra.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.zebra.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
       initContainers:
       {{- if .Values.zebra.initSnapshot.enabled }}
       - name: restore-snapshot
