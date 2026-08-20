@@ -66,6 +66,11 @@ spec:
           mountPath: /home/zaino/.cache/zaino
         - name: config
           mountPath: /etc/zaino
+        {{- if .Values.zaino.zebraCache.enabled }}
+        - name: zebra-cache
+          mountPath: {{ .Values.zaino.zebraCache.mountPath }}
+          readOnly: {{ .Values.zaino.zebraCache.readOnly }}
+        {{- end }}
         readinessProbe:
           tcpSocket:
             port: 8137
@@ -83,6 +88,12 @@ spec:
       - name: config
         configMap:
           name: {{ .Values.zaino.name }}-config
+      {{- if .Values.zaino.zebraCache.enabled }}
+      - name: zebra-cache
+        hostPath:
+          path: {{ .Values.zaino.zebraCache.hostPath }}
+          type: Directory
+      {{- end }}
   volumeClaimTemplates:
   - metadata:
       name: data

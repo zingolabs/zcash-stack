@@ -198,6 +198,12 @@ zaino:
   additionalArgs: []
   runAsUser: 1000
   runAsGroup: 1000
+  # Optional: mount an external Zebra state-db cache (read-only) for state-mode zaino.
+  zebraCache:
+    enabled: false
+    hostPath: ""            # host directory holding Zebra's cache_dir (the seeded shared cache)
+    mountPath: /var/cache/zebrad-cache
+    readOnly: true
   config:
     dbSize: 64
     # Zaino backend selector: 'fetch' (JSON-RPC) or 'state'/'direct' (read Zebra's state db)
