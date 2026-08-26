@@ -12,6 +12,9 @@ data:
     network = "Mainnet"
     {{- end }}
     listen_addr = "0.0.0.0:{{ if .Values.zebra.testnet }}18233{{ else }}8233{{ end }}"
+    {{- with .Values.zebra.initialPeers }}
+    initial_{{ if $.Values.zebra.testnet }}testnet{{ else }}mainnet{{ end }}_peers = [{{ range $i, $p := . }}{{ if $i }}, {{ end }}"{{ $p }}"{{ end }}]
+    {{- end }}
     [state]
     cache_dir = "/var/cache/zebrad-cache"
     [rpc]

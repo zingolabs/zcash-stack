@@ -21,4 +21,10 @@ spec:
       targetPort: 8080
       protocol: TCP
       name: metrics
+    {{- if .Values.zebra.service.p2p }}
+    - port: {{ if .Values.zebra.testnet }}18233{{ else }}8233{{ end }}
+      targetPort: {{ if .Values.zebra.testnet }}18233{{ else }}8233{{ end }}
+      protocol: TCP
+      name: p2p
+    {{- end }}
 {{- end }}

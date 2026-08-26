@@ -16,6 +16,9 @@ zebra:
   nodeSelector: {}
   affinity: {}
   tolerations: []
+  # Override Zebra's initial peer list, e.g. ["zebra.golden-mainnet.svc:8233"] to
+  # sync in-cluster from another zebra. Empty = default DNS seeders.
+  initialPeers: []
   initSnapshot:
     enabled: false
     url: https://link.storjshare.io/s/jvwzyxteyqlmbfayt6jgmhaaus3a/nodedumps/zec/zebra-2025-09-12.tar?download=1
@@ -33,6 +36,8 @@ zebra:
       #   apiGroup: snapshot.storage.k8s.io
   service:
     type: ClusterIP
+    # Expose the P2P port (8233/18233) on the Service (e.g. for in-cluster peering).
+    p2p: false
   requests: {}
   # requests:
   #   cpu: 2
