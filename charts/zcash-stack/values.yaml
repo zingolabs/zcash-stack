@@ -7,6 +7,9 @@ zebra:
   enabled: false
   name: zebra
   testnet: false
+  # Serve Zebra's indexer gRPC (8230/18230) — the endpoint zaino's state/direct
+  # backend syncer connects to. Adds indexer_listen_addr + exposes the service port.
+  indexer: false
   image:
     repository: zfnd/zebra
     tag: 4.0.0
@@ -212,6 +215,9 @@ zaino:
   additionalArgs: []
   runAsUser: 1000
   runAsGroup: 1000
+  # Apply runAsUser/runAsGroup as the zaino CONTAINER's securityContext (not just the
+  # init chown). Needed for state mode: run as 2001 to read Zebra's 0600 cache files.
+  applyRunAsUser: false
   # Optional: mount an external Zebra state-db cache (read-only) for state-mode zaino.
   zebraCache:
     enabled: false

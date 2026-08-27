@@ -45,6 +45,11 @@ spec:
       - name: zaino
         image: {{ .Values.zaino.image.repository }}:{{ .Values.zaino.image.tag }}{{- if .Values.zaino.image.hash }}@sha256:{{ .Values.zaino.image.hash }}{{- end }}
         imagePullPolicy: {{ .Values.zaino.image.pullPolicy }}
+        {{- if .Values.zaino.applyRunAsUser }}
+        securityContext:
+          runAsUser: {{ .Values.zaino.runAsUser }}
+          runAsGroup: {{ .Values.zaino.runAsGroup }}
+        {{- end }}
         command: ["zainod"]
         args:
           - start

@@ -27,4 +27,10 @@ spec:
       protocol: TCP
       name: p2p
     {{- end }}
+    {{- if .Values.zebra.indexer }}
+    - port: {{ if .Values.zebra.testnet }}18230{{ else }}8230{{ end }}
+      targetPort: {{ if .Values.zebra.testnet }}18230{{ else }}8230{{ end }}
+      protocol: TCP
+      name: indexer
+    {{- end }}
 {{- end }}
