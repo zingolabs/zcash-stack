@@ -15,6 +15,9 @@ data:
     {{- with .Values.zebra.initialPeers }}
     initial_{{ if $.Values.zebra.testnet }}testnet{{ else }}mainnet{{ end }}_peers = [{{ range $i, $p := . }}{{ if $i }}, {{ end }}"{{ $p }}"{{ end }}]
     {{- end }}
+    {{- with .Values.zebra.maxConnectionsPerIp }}
+    max_connections_per_ip = {{ . }}
+    {{- end }}
     [state]
     cache_dir = "/var/cache/zebrad-cache"
     [rpc]

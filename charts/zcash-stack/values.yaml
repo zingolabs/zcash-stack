@@ -22,6 +22,9 @@ zebra:
   # Override Zebra's initial peer list, e.g. ["zebra.golden-mainnet.svc:8233"] to
   # sync in-cluster from another zebra. Empty = default DNS seeders.
   initialPeers: []
+  # Connections Zebra keeps per peer IPv4 (or IPv6 /64); unset = Zebra's default of 1. Raise it
+  # for a zebra that serves several peers behind one address (e.g. a Tailscale operator proxy).
+  maxConnectionsPerIp: null
   initSnapshot:
     enabled: false
     url: https://link.storjshare.io/s/jvwzyxteyqlmbfayt6jgmhaaus3a/nodedumps/zec/zebra-2025-09-12.tar?download=1
