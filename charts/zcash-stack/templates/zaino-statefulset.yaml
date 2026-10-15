@@ -19,9 +19,23 @@ spec:
       nodeSelector:
         {{- toYaml . | nindent 8 }}
       {{- end }}
-      {{- with .Values.zaino.affinity }}
+      {{- if .Values.zaino.affinity }}
       affinity:
-        {{- toYaml . | nindent 8 }}
+        {{- toYaml .Values.zaino.affinity | nindent 8 }}
+      {{- else if .Values.zebra.enabled }}
+      # Default: prefer co-locating with zebra. zaino calls zebra's RPC
+      # per block during a catch-up sync; across nodes that round trip
+      # dominates and can slow a sync by an order of magnitude. Soft
+      # (preferred, not required) so a full node never leaves zaino Pending.
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 100
+            podAffinityTerm:
+              labelSelector:
+                matchLabels:
+                  app: {{ .Values.zebra.name }}
+              topologyKey: kubernetes.io/hostname
       {{- end }}
       {{- with .Values.zaino.tolerations }}
       tolerations:
